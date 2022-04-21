@@ -31,29 +31,29 @@ jobs:
           fetch-depth: 1
           path: go/src/github.com/microservices-demo/catalogue
 
-      - uses: actions/setup-go@v1
-        with:
-          go-version: ${{ env.GO_VERSION }}
+      #- uses: actions/setup-go@v1
+      #  with:
+      #    go-version: ${{ env.GO_VERSION }}
 
-      - name: Setup PATH
-        run: echo "${GOPATH}/bin" >> $GITHUB_PATH
+      #- name: Setup PATH
+      #  run: echo "${GOPATH}/bin" >> $GITHUB_PATH
 
-      - name: Install dependencies
-        run: go get -u github.com/FiloSottile/gvt && gvt restore && go get -v github.com/mattn/goveralls
+      #- name: Install dependencies
+      #  run: go get -u github.com/FiloSottile/gvt && gvt restore && go get -v github.com/mattn/goveralls
 
       - name: Build
         run: ./scripts/build.sh
 
-      - name: Unit Test
-        run: ./test/test.sh unit.py
+      #- name: Unit Test
+      #  run: ./test/test.sh unit.py
 
-      - name: Test Docker Image
-        run: ./test/test.sh container.py
+      #- name: Test Docker Image
+      #  run: ./test/test.sh container.py
 
-      - name: Submit Coveralls
-        env:
-          COVERALLS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: goveralls -coverprofile=coverage.out -service=github
+      #- name: Submit Coveralls
+      #  env:
+      #    COVERALLS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #  run: goveralls -coverprofile=coverage.out -service=github
 
       # Push to dockerhub
       - name: Push catalogue to Docker Hub
